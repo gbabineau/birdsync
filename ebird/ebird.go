@@ -206,6 +206,7 @@ func DownloadMLAsset(mlAssetID string) (string, bool, error) {
 	if err != nil {
 		return "", isPhoto, fmt.Errorf("DownloadMLAsset(%s): failed to copy asset data to file: %w", mlAssetID, err)
 	}
+	
 	ext := ".mp3"
 	if isPhoto {
 		// For photos only: re-open the file to detect content type
