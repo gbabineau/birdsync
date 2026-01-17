@@ -206,7 +206,6 @@ func DownloadMLAsset(mlAssetID string) (string, bool, error) {
 	if err != nil {
 		return "", isPhoto, fmt.Errorf("DownloadMLAsset(%s): failed to copy asset data to file: %w", mlAssetID, err)
 	}
-
 	ext := ".mp3"
 	if isPhoto {
 		// For photos only: re-open the file to detect content type
@@ -227,9 +226,9 @@ func DownloadMLAsset(mlAssetID string) (string, bool, error) {
 		if err != nil || len(extensions) == 0 {
 			return "", isPhoto, fmt.Errorf("DownloadMLAsset(%s): failed to find file extension for mime type %s: %w", mlAssetID, mimeType, err)
 		}
-		tmpFile.Close() // Close the file before renaming it.
 		ext = extensions[0]
 	}
+	tmpFile.Close() // Close the file before renaming it.
 
 	newPath := tmpFile.Name() + ext
 	err = os.Rename(tmpFile.Name(), newPath)
